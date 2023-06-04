@@ -17,15 +17,20 @@ const AppDataSource = new DataSource({
     port: 5432,
     username: "postgres",
     password: "postgres",
-    database: "typeorm_db"
+    database: "typeorm_db",
+    entities: ["src/entites/*{.ts,.js}"],
+    synchronize: true,
+    logging: true
 });
 
 AppDataSource.initialize().then(()=>{
-    console.log("Connected Successfully.....")
+    console.log("Connected Successfully.....");
+
+    app.listen(port, ()=>{
+        console.log(`App Runnig On Port: ${port}`)
+    });
+
 }).catch((err)=>{
     console.log(err);
 });
 
-app.listen(port, ()=>{
-    console.log(`App Runnig On Port: ${port}`)
-})
